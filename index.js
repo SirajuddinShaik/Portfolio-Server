@@ -10,6 +10,7 @@ import bcrypt from "bcryptjs";
 // import adminRoutes from "./routes/adminRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import learningRoutes from "./routes/learningRoutes.js";
+import loginRoutes from "./routes/loginRoutes.js";
 const app = express();
 dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -18,6 +19,7 @@ app.use(cors());
 
 app.use("/api/project", projectRoutes);
 app.use("/api/learning", learningRoutes);
+app.use("/api/login", loginRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.get("/", (req, res) => {
