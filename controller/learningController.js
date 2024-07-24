@@ -52,6 +52,7 @@ export const getLearning = async (req, res) => {
     // Set end to 11:59 PM of the toDate
     end.setHours(23, 59, 59, 999);
   }
+  start.setDate(start.getDate() - 5);
   console.log(start, end);
   try {
     const docs = await Learning.find({
@@ -60,10 +61,10 @@ export const getLearning = async (req, res) => {
         $lte: end,
       },
     });
-    console.log(docs);
+    // console.log(docs);
     return res.status(200).json({
       success: true,
-      learnings: docs,
+      learnings: docs.reverse(),
     });
   } catch (error) {
     console.error(error);
