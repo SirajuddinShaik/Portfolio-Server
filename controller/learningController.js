@@ -43,6 +43,7 @@ export const getLearning = async (req, res) => {
     const now = new Date();
     start = new Date(now.setHours(0, 0, 0, 0)); // Set start to 12:00 AM of the current day
     end = new Date(now.setHours(23, 59, 59, 999)); // Set end to 11:59 PM of the current day
+    start.setDate(start.getDate() - 5);
   } else {
     start = new Date(fromDate);
     end = new Date(toDate);
@@ -52,7 +53,6 @@ export const getLearning = async (req, res) => {
     // Set end to 11:59 PM of the toDate
     end.setHours(23, 59, 59, 999);
   }
-  start.setDate(start.getDate() - 5);
   console.log(start, end);
   try {
     const docs = await Learning.find({
