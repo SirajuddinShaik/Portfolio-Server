@@ -1,5 +1,4 @@
-import Learning from "../models/learning.js";
-import TodaysLearning from "../models/learning.js";
+import { TodaysLearning, LearningForm } from "../models/learning.js";
 
 export const getTodaysLearning = async (req, res) => {
   console.log(req);
@@ -55,7 +54,7 @@ export const getLearning = async (req, res) => {
   }
   console.log(start, end);
   try {
-    const docs = await Learning.find({
+    const docs = await TodaysLearning.find({
       date: {
         $gte: start,
         $lte: end,
@@ -71,6 +70,40 @@ export const getLearning = async (req, res) => {
     return res.status(500).json({
       success: true,
       learnings: [],
+    });
+  }
+};
+
+export const getSaveData = async (req, res) => {
+  try {
+    const formData = await LearningForm.findById("owner");
+    return res.status(200).json({
+      success: true,
+      saveData: formData,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+    });
+  }
+};
+
+export const setSaveData = async (req, res) => {
+  try {
+    const { title, description, link } = req.body;
+    await LearningForm.findByIdAndUpdate("owner", {
+      title: title,
+      description: description,
+      link: link,
+    });
+    return res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
     });
   }
 };

@@ -22,4 +22,27 @@ const dayLearningSchema = mongoose.Schema(
   { strict: false }
 );
 
-export default mongoose.model("daylearning", dayLearningSchema);
+export const TodaysLearning = mongoose.model("daylearning", dayLearningSchema);
+
+const learningFormSchema = mongoose.Schema(
+  {
+    _id: {
+      type: String,
+      require: true,
+    },
+    title: {
+      type: String,
+      require: true,
+    },
+    description: {
+      type: String,
+      require: true,
+    },
+    link: {
+      type: String,
+    },
+  },
+  { strict: false }
+);
+
+export const LearningForm = mongoose.model("learningform", learningFormSchema);
