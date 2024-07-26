@@ -1,4 +1,4 @@
-import { TodaysLearning, LearningForm } from "../models/learning.js";
+import { TodaysLearning, LearningForm, Category } from "../models/learning.js";
 
 export const getTodaysLearning = async (req, res) => {
   console.log(req);
@@ -77,9 +77,11 @@ export const getLearning = async (req, res) => {
 export const getSaveData = async (req, res) => {
   try {
     const formData = await LearningForm.findById("owner");
+    const categories = await Category.find({});
     return res.status(200).json({
       success: true,
       saveData: formData,
+      categories: categories,
     });
   } catch (error) {
     console.error(error);
@@ -91,11 +93,12 @@ export const getSaveData = async (req, res) => {
 
 export const setSaveData = async (req, res) => {
   try {
-    const { title, description, link } = req.body;
+    const { title, description, link, category } = req.body;
     await LearningForm.findByIdAndUpdate("owner", {
       title: title,
       description: description,
       link: link,
+      category: category,
     });
     return res.status(200).json({
       success: true,

@@ -22,8 +22,6 @@ const dayLearningSchema = mongoose.Schema(
   { strict: false }
 );
 
-export const TodaysLearning = mongoose.model("daylearning", dayLearningSchema);
-
 const learningFormSchema = mongoose.Schema(
   {
     _id: {
@@ -31,6 +29,10 @@ const learningFormSchema = mongoose.Schema(
       require: true,
     },
     title: {
+      type: String,
+      require: true,
+    },
+    category: {
       type: String,
       require: true,
     },
@@ -45,4 +47,20 @@ const learningFormSchema = mongoose.Schema(
   { strict: false }
 );
 
+const categorySchema = mongoose.Schema(
+  {
+    value: {
+      type: String,
+      require: true,
+    },
+    label: {
+      type: String,
+      require: true,
+    },
+  },
+  { strict: false }
+);
+
 export const LearningForm = mongoose.model("learningform", learningFormSchema);
+export const TodaysLearning = mongoose.model("daylearning", dayLearningSchema);
+export const Category = mongoose.model("category", categorySchema);
