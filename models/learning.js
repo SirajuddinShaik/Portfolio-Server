@@ -18,6 +18,10 @@ const dayLearningSchema = mongoose.Schema(
       type: Date,
       required: true,
     },
+    category: {
+      type: String,
+      require: true,
+    },
   },
   { strict: false }
 );
