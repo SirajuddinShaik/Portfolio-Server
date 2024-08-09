@@ -9,11 +9,12 @@ export const getTodaysLearning = async (req, res) => {
 
 export const addTodaysLearning = async (req, res) => {
   try {
-    const { title, description, date, str_date, category } = req.body;
+    const { title, description, date, str_date, category, link } = req.body;
     const newTodaysLearning = new TodaysLearning({
       title: title,
       description: description,
       date: date,
+      link: link,
       str_date: str_date,
       category: category,
     });
