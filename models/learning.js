@@ -64,7 +64,34 @@ const categorySchema = mongoose.Schema(
   },
   { strict: false }
 );
+const testSchema = mongoose.Schema(
+  {
+    test: {
+      type: String,
+      unique: true,
+      require: true,
+    },
+    description: {
+      type: String,
+      require: true,
+    },
+    date: {
+      type: Date,
+      required: true,
+    },
+    completed: {
+      type: Boolean,
+      require: true,
+    },
+    selected: {
+      type: Boolean,
+      require: true,
+    },
+  },
+  { strict: false }
+);
 
+export const Test = mongoose.model("test", testSchema);
 export const LearningForm = mongoose.model("learningform", learningFormSchema);
 export const TodaysLearning = mongoose.model("daylearning", dayLearningSchema);
 export const Category = mongoose.model("category", categorySchema);
