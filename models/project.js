@@ -14,12 +14,19 @@ const projectSchema = mongoose.Schema(
       type: String,
       require: true,
     },
-    ghLink: {
+    link: {
       type: String,
       require: true,
     },
     demoLink: {
       type: String,
+      require: true,
+    },
+    rank: {
+      type: Number,
+    },
+    isBlog: {
+      type: Boolean,
       require: true,
     },
     date: {

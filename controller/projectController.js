@@ -10,19 +10,24 @@ export const getProjects = async (req, res) => {
 export const addProject = async (req, res) => {
   try {
     console.log(req);
-    const { title, imgPath, description, ghLink, demoLink, date } = req.body;
+    const { title, imgName, description, link, isBlog, rank, demoLink, date } =
+      req.body;
     const existingproject = await Project.findOne({ title: title });
     if (existingproject) {
       errors.emailError = "Email already exists";
       return res.status(400).json(errors);
     }
     const newProject = new Project({
-      title:title,
-      imgPath:imgPath,
-      description:description,
-      ghLink:ghLink,
-      demoLink:demoLink,
-      date:date,
+      title: title,
+      imgPath:
+        "https://raw.githubusercontent.com/SirajuddinShaik/Images/main/project/" +
+        imgName,
+      description: description,
+      link: link,
+      isBlog: isBlog,
+      rank: rank,
+      demoLink: demoLink,
+      date: date,
     });
     await newProject.save();
     return res.status(200).json({
@@ -38,11 +43,7 @@ export const addProject = async (req, res) => {
   }
 };
 
-export const removeProject=(req,res)=>{
-    try {
-
-        
-    } catch (error) {
-        
-    }
+export const removeProject = (req, res) => {
+  try {
+  } catch (error) {}
 };
