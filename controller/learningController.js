@@ -183,6 +183,18 @@ function validateInterviewQuestions(questions) {
           errors.push(index);
         }
         break;
+      case "coding_problem":
+        if (
+          !question.problem ||
+          !question.solution ||
+          !question.explanation
+        ) {
+          errors.push(index);
+        }
+        questions[index].type = "coding"
+        questions[index].expected_solution = questions[index].solution
+
+        break;
       case "case_study":
         if (!question.scenario || !question.approach) {
           errors.push(index);
@@ -291,7 +303,7 @@ export const addTest = async (req, res) => {
     await newTest.save();
     return res.status(200).json({
       success: true,
-      message: "Test added successfully!" + " Errors " + errors.length,
+      message: "Test added successfully!" + " Errors " + (errors.length),
     });
   } catch (error) {
     const errors = { backendError: String };
