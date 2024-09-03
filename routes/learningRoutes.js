@@ -8,6 +8,8 @@ import {
   addTest,
   getTest,
   completeTest,
+  getRevision,
+  completeRevision,
 } from "../controller/learningController.js";
 
 const router = express.Router();
@@ -20,6 +22,8 @@ router.post("/completeTest", completeTest);
 router.get("/getTest", getTest);
 router.post("/saveData", setSaveData);
 router.get("/saveData", getSaveData);
+router.get("/getRevisionData", getRevision);
+router.post("/completeRevision", completeRevision);
 router.get("/", getTodaysLearning);
 
 export default router;

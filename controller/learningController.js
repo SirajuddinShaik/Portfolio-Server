@@ -184,15 +184,11 @@ function validateInterviewQuestions(questions) {
         }
         break;
       case "coding_problem":
-        if (
-          !question.problem ||
-          !question.solution ||
-          !question.explanation
-        ) {
+        if (!question.problem || !question.solution || !question.explanation) {
           errors.push(index);
         }
-        questions[index].type = "coding"
-        questions[index].expected_solution = questions[index].solution
+        questions[index].type = "coding";
+        questions[index].expected_solution = questions[index].solution;
 
         break;
       case "case_study":
@@ -303,7 +299,7 @@ export const addTest = async (req, res) => {
     await newTest.save();
     return res.status(200).json({
       success: true,
-      message: "Test added successfully!" + " Errors " + (errors.length),
+      message: "Test added successfully!" + " Errors " + errors.length,
     });
   } catch (error) {
     const errors = { backendError: String };
@@ -378,4 +374,86 @@ export const completeTest = async (req, res) => {
     }, // Fields to update
     { new: true } // This option returns the modified document
   );
+  return res.status(200).json({
+    success: true,
+    data: {
+      id: "Hlo",
+    },
+  });
+};
+
+export const getRevision = async (req, res) => {
+  try {
+    var revision = await TodaysLearning.findOne({ selected: true });
+    if (revision) {
+      return res.status(200).json({
+        success: true,
+        data: {
+          revisionData: revision,
+        },
+      });
+    }
+    var revision = await TodaysLearning.findOneAndUpdate(
+      {},
+      {
+        $set: {
+          selected: true,
+        },
+        $inc: { revisedCount: 1 },
+      }, // Fields to update
+      { sort: { revisedCount: 1 }, new: true }
+    );
+    if (revision) {
+      return res.status(200).json({
+        success: true,
+        data: {
+          revisionData: revision,
+        },
+      });
+    }
+
+    return res.status(200).json({
+      success: false,
+      message: "No Tests Available",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+    });
+  }
+};
+
+export const completeRevision = async (req, res) => {
+  const { id } = req.body;
+  const currentDate = new Date();
+  await TodaysLearning.findOneAndUpdate(
+    { _id: id }, // Replace "owner" with the actual owner ID or search criteria
+    {
+      $set: {
+        selected: false,
+        lastRevised: currentDate,
+      },
+    }, // Fields to update
+    { new: true } // This option returns the modified document
+  );
+  return res.status(200).json({
+    success: true,
+    data: {
+      id: "Hlo",
+    },
+  });
+};
+
+export const test = async (req, res) => {
+  await TodaysLearning.updateMany(
+    {},
+    { $set: { selected: false, revisedCount: 0, lastRevised: new Date() } }
+  );
+  return res.status(200).json({
+    success: true,
+    data: {
+      id: "Hlo",
+    },
+  });
 };

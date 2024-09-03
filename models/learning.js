@@ -22,6 +22,9 @@ const dayLearningSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    revisedCount: Number,
+    selected: Boolean,
+    lastRevised: Date,
   },
   { strict: false }
 );
