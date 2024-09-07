@@ -22,6 +22,7 @@ export const addTodaysLearning = async (req, res) => {
       link: link,
       str_date: str_date,
       category: category,
+      lastRevised: date,
     });
     await newTodaysLearning.save();
     return res.status(200).json({
