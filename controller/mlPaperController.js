@@ -1,18 +1,16 @@
 import MlPaper from "../models/mlpaper.js";
 
 export const getMlPapers = async (req, res) => {
-  console.log(req);
-
-  const learnings = await MlPaper.find({});
-  res.status(200).json({ learnings: learnings });
+  const papers = await MlPaper.find({});
+  res.status(200).json({ papers: papers });
 };
 
 export const addMlPaper = async (req, res) => {
   try {
-    const { title, description, date, link } = req.body;
+    const { title, refLink, date, link } = req.body;
     const newMlPaper = new MlPaper({
       title: title,
-      description: description,
+      refLink: refLink,
       date: date,
       link: link,
     });

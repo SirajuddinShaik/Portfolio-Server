@@ -10,6 +10,7 @@ import bcrypt from "bcryptjs";
 // import adminRoutes from "./routes/adminRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import learningRoutes from "./routes/learningRoutes.js";
+import mlPaperRoutes from "./routes/mlPapersRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
 const app = express();
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/api/project", projectRoutes);
+app.use("/api/paper", mlPaperRoutes);
 app.use("/api/learning", learningRoutes);
 app.use("/api/login", loginRoutes);
 

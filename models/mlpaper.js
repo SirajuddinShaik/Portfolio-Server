@@ -6,7 +6,7 @@ const mlPaperSchema = mongoose.Schema(
       type: String,
       require: true,
     },
-    description: {
+    refLink: {
       type: String,
       require: true,
     },
