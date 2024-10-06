@@ -12,6 +12,7 @@ import projectRoutes from "./routes/projectRoutes.js";
 import learningRoutes from "./routes/learningRoutes.js";
 import mlPaperRoutes from "./routes/mlPapersRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
+import certificationRoutes from "./routes/certificationRoutes.js";
 const app = express();
 dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -22,6 +23,7 @@ app.use("/api/project", projectRoutes);
 app.use("/api/paper", mlPaperRoutes);
 app.use("/api/learning", learningRoutes);
 app.use("/api/login", loginRoutes);
+app.use("/api/certification", certificationRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.get("/", (req, res) => {
