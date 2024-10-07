@@ -3,7 +3,7 @@ export const getCertifications = async (req, res) => {
   // console.log(req);
 
   const certifications = await Certification.find({}).sort({
-    completionDate: -1,
+    completeDate: -1,
   });
   res.status(200).json({ certifications: certifications });
 };
